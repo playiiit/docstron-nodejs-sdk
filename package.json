@@ -1,0 +1,42 @@
+{
+  "name": "docstron-sdk",
+  "version": "0.3.0",
+  "description": "Node.js SDK for Docstron PDF Generation API - Complete Features",
+  "main": "index.js",
+   "scripts": {
+    "test": "node test/test.js",
+    "example": "node examples/basic-usage.js",
+    "example:invoice": "node examples/invoice-template.js",
+    "example:generate": "node examples/generate-pdf.js",
+    "example:quick": "node examples/quick-generate.js",
+    "example:existing": "node examples/generate-from-existing-template.js",
+    "example:batch": "node examples/batch-generate.js",
+    "example:apps": "node examples/manage-applications.js",
+    "example:workflow": "node examples/complete-workflow-with-apps.js"
+  },
+  "keywords": [
+    "pdf",
+    "pdf-generation",
+    "docstron",
+    "api-client",
+    "document",
+    "templates",
+    "applications"
+  ],
+  "author": "CM_Soyza cmsoyza@gmail.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChamithSoyza/doctron-node-sdk"
+  },
+  "dependencies": {
+    "axios": "^1.13.2",
+    "dotenv": "^17.2.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.50.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
