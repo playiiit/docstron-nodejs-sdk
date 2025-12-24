@@ -58,7 +58,7 @@ const client = new Docstron();
 
 // With custom options
 const client = new Docstron("your-api-key-here", {
-  baseURL: "https://custom-api.docstron.com",
+  baseURL: "https://api.docstron.com/v1",
 });
 ```
 
