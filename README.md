@@ -5,7 +5,7 @@
 
 The official Node.js library for the [Docstron](https://docstron.com) PDF Generation API.
 
-## 📋 What's Included in v1.0.0
+## 📋 What's Included
 
 ✅ **Template Management**
 
@@ -15,16 +15,19 @@ The official Node.js library for the [Docstron](https://docstron.com) PDF Genera
 - Delete templates
 - List all templates
 
-🚧 **Coming Soon**
-
-- v0.2.0: Document generation (PDF creation from templates)
-- v0.3.0: Application management
-- v1.0.0: Full feature set with comprehensive testing
-
 ## Installation
 
 ```bash
 npm install docstron
+```
+
+## Configuration
+
+Add your API key to your environment:
+
+```env
+DOCSTRON_API_KEY=your-api-key
+DOCSTRON_BASE_URL=https://api.docstron.com/v1
 ```
 
 ## Quick Start
@@ -33,7 +36,7 @@ npm install docstron
 const Docstron = require("docstron");
 
 // Initialize the client
-const client = new Docstron("your-api-key-here");
+const client = new Docstron();
 
 // Create a template
 const template = await client.templates.create({
@@ -51,7 +54,7 @@ console.log("Template created:", template.template_id);
 Get your API key from your [Docstron Dashboard](https://docstron.com/dashboard).
 
 ```javascript
-const client = new Docstron("your-api-key-here");
+const client = new Docstron();
 
 // With custom options
 const client = new Docstron("your-api-key-here", {
