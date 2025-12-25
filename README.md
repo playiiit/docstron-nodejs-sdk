@@ -78,7 +78,7 @@ Create a new PDF template.
 - `is_active` (boolean, optional) - Active status (default: `true`)
 - `extra_css` (string, optional) - Additional CSS rules for PDF styling
 
-**Returns:** Promise<Template>
+**Returns:** Promise
 
 **Example:**
 
@@ -108,7 +108,7 @@ Retrieve a specific template by ID.
 
 - `templateId` (string, required) - The template ID
 
-**Returns:** Promise<Template>
+**Returns:** Promise
 
 **Example:**
 
@@ -126,7 +126,7 @@ Update an existing template.
 - `templateId` (string, required) - The template ID
 - `params` (object, required) - Fields to update
 
-**Returns:** Promise<Template>
+**Returns:** Promise
 
 **Example:**
 
@@ -145,7 +145,7 @@ Delete a template.
 
 - `templateId` (string, required) - The template ID
 
-**Returns:** Promise<Object>
+**Returns:** Promise
 
 **Example:**
 
@@ -162,7 +162,7 @@ List all templates for an application.
 
 - `applicationId` (string, required) - The application ID
 
-**Returns:** Promise<Array<Template>>
+**Returns:** Promise
 
 **Example:**
 
@@ -274,7 +274,7 @@ Update document data.
 
 Delete a document.
 
-### Applications (v0.3.0+)
+### Applications
 
 #### `applications.create(params)`
 
@@ -286,7 +286,7 @@ Create a new application to organize your templates and documents.
 - `params.description` (string, optional) - Application description
 - `params.is_active` (boolean, optional) - Active status (default: `true`)
 
-**Returns:** Promise<Application>
+**Returns:** Promise
 
 **Example:**
 
@@ -357,28 +357,6 @@ await client.applications.delete("app-xxx");
 console.log("Application deleted");
 ```
 
-#### `applications.listActive()`
-
-Get only active applications.
-
-**Example:**
-
-```javascript
-const activeApps = await client.applications.listActive();
-console.log(`Active: ${activeApps.length}`);
-```
-
-#### `applications.listInactive()`
-
-Get only inactive applications.
-
-**Example:**
-
-```javascript
-const inactiveApps = await client.applications.listInactive();
-console.log(`Inactive: ${inactiveApps.length}`);
-```
-
 ## Response Types
 
 When generating documents, you can choose the response format:
@@ -423,10 +401,9 @@ Use double curly braces to create dynamic placeholders:
 <p>Date: {{order_date}}</p>
 ```
 
-When generating PDFs (coming in v0.2.0), you'll pass data to fill these placeholders:
+When generating PDFs, you'll pass data to fill these placeholders:
 
 ```javascript
-// Coming in v0.2.0
 {
   customer_name: "John Doe",
   order_number: "12345",
@@ -467,116 +444,23 @@ try {
 }
 ```
 
-## Examples
-
-### Complete Workflow
-
-```javascript
-const Docstron = require("docstron");
-const client = new Docstron("your-api-key");
-
-// 1. Create template
-const template = await client.templates.create({
-  application_id: "app-xxx",
-  name: "Invoice",
-  content: "<h1>Invoice #{{invoice_no}}</h1>",
-});
-
-// 2. Generate PDF
-const pdf = await client.documents.generate(template.template_id, {
-  data: { invoice_no: "12345" },
-  response_type: "document_id",
-});
-
-// 3. Download PDF
-await client.documents.download(pdf.document_id, "./invoice.pdf");
-
-console.log("PDF saved to invoice.pdf");
-```
-
-### Quick Generation
-
-```javascript
-// Generate without creating a template
-const doc = await client.documents.quickGenerate({
-  html: "<h1>Receipt</h1><p>Total: {{total}}</p>",
-  data: { total: "$99.00" },
-  response_type: "document_id",
-});
-
-console.log("PDF URL:", doc.download_url);
-```
-
-### Password Protection
-
-```javascript
-const doc = await client.documents.generate(templateId, {
-  data: {
-    /* your data */
-  },
-  password: "SecurePass123!",
-  response_type: "document_id",
-});
-```
-
-### Basic Usage
-
-```bash
-DOCSTRON_API_KEY=your-key npm run example
-```
-
-### Create Invoice Template
-
-```bash
-DOCSTRON_API_KEY=your-key npm run example:invoice
-```
-
-## Development
-
-```bash
-# Install dependencies
-npm install
-
-# Run tests (basic validation tests)
-npm test
-
-# Run examples
-npm run example
-npm run example:invoice
-```
-
 ## Requirements
 
 - Node.js >= 14.0.0
 - A Docstron account and API key
 
-## Roadmap
-
-### v0.2.0 (Coming Soon)
-
-- 📄 Document generation from templates
-- 🔄 Asynchronous PDF processing
-- 📥 Multiple output formats (URL, base64, binary)
-
-### v0.3.0 (Planned)
-
-- 🏢 Application management
-- 📊 Usage statistics
-- 🔐 Advanced authentication options
-
-### v1.0.0 (Future)
-
-- 🎯 Full API coverage
-- ✅ Comprehensive test suite
-- 📚 Extended documentation
-- 🔌 Webhook support
-
 ## Support
 
 - 📧 Email: support@docstron.com
 - 📚 Documentation: https://docs.docstron.com
-- 🐛 Issues: https://github.com/yourusername/docstron-sdk/issues
-- 💬 Discussions: https://github.com/yourusername/docstron-sdk/discussions
+- 🐛 Issues: https://github.com/playiiit/docstron-nodejs-sdk/issues
+- 💬 Discussions: https://github.com/playiiit/docstron-nodejs-sdk/discussions
+
+## Contributors
+
+<a href="https://github.com/chamithsoyza">
+  <img src="https://avatars.githubusercontent.com/u/99801726?v=4" width="60" style="border-radius: 100%; vertical-align: middle; margin-right: 5px;">
+</a>
 
 ## Contributing
 
@@ -587,203 +471,3 @@ Contributions are welcome! This is an early-stage project, and we'd love your he
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
-
-## License
-
-MIT © [Your Name]
-
-## Changelog
-
-### [0.3.0] - 2025-11-17
-
-### Added
-
-- Application management (create, get, list, update, delete)
-- Filter active/inactive applications with `listActive()` and `listInactive()`
-- Complete workflow example (Application → Template → Document)
-- Application organization best practices
-
-### Examples
-
-- `manage-applications.js` - Full application CRUD examples
-- `complete-workflow-with-apps.js` - End-to-end workflow demonstration
-
-### Improvements
-
-- Updated all documentation with application examples
-- Added application organization patterns
-- Complete SDK feature set (Templates, Documents, Applications)
-
-### [0.2.0] - 2025-11-17
-
-### Added
-
-- Document generation from templates
-- Quick PDF generation without templates
-- Document management (get, list, update, delete)
-- PDF download functionality
-- Password protection for PDFs
-- Multiple response type support
-
-### [0.1.0] - 2025-11-17
-
-### Added
-
-- Initial release
-- Template management (CRUD operations)
-- Basic error handling
-
-# Dependencies
-
-node_modules/
-
-# Environment
-
-.env
-.env.local
-.env.\*.local
-
-# Logs
-
-_.log
-npm-debug.log_
-yarn-debug.log*
-yarn-error.log*
-
-# Editor directories
-
-.vscode/
-.idea/
-_.swp
-_.swo
-\*~
-
-# OS
-
-.DS_Store
-Thumbs.db
-
-# Testing
-
-coverage/
-.nyc_output/
-
-# Build
-
-dist/
-build/
-
-# Optional npm cache
-
-.npm
-
-# Optional eslint cache
-
-.eslintcache
-
-```
-
-### 4. .npmignore
-```
-
-# Development files
-
-test/
-examples/
-.vscode/
-.idea/
-
-# Git files
-
-.git/
-.gitignore
-.gitattributes
-
-# CI/CD
-
-.github/
-.travis.yml
-.gitlab-ci.yml
-
-# Documentation source
-
-docs/
-
-## Complete Workflow Example
-
-Here's a complete example showing all features working together:
-
-```javascript
-const Docstron = require("docstron-sdk");
-const client = new Docstron("your-api-key");
-
-// 1. Create application
-const app = await client.applications.create({
-  name: "My Invoice App",
-  description: "Customer invoicing system",
-});
-
-// 2. Create template in the application
-const template = await client.templates.create({
-  application_id: app.app_id,
-  name: "Standard Invoice",
-  content: "<h1>Invoice #{{number}}</h1><p>Total: {{total}}</p>",
-});
-
-// 3. Generate PDF from template
-const doc = await client.documents.generate(template.template_id, {
-  data: {
-    number: "12345",
-    total: "$999.00",
-  },
-});
-
-// 4. Download the PDF
-await client.documents.download(doc.document_id, "./invoice.pdf");
-
-console.log("✅ Complete workflow finished!");
-```
-
-## Application Organization Best Practices
-
-# Environment
-
-.env
-.env.\*
-
-# Logs
-
-\*.log
-
-# Editor files
-
-_.swp
-_.swo
-\*~
-
-```
-
-### 5. LICENSE (MIT)
-```
-
-MIT License
-
-Copyright (c) 2025 [Your Name]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.

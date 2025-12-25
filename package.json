@@ -1,6 +1,6 @@
 {
   "name": "docstron",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Node.js SDK for Docstron PDF Generation API - Complete Features",
   "main": "index.js",
    "scripts": {
@@ -23,11 +23,11 @@
     "templates",
     "applications"
   ],
-  "author": "CM_Soyza cmsoyza@gmail.com",
+  "author": "Playiiit (Pvt) Ltd",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ChamithSoyza/doctron-node-sdk"
+    "url": "https://github.com/playiiit/docstron-nodejs-sdk"
   },
   "dependencies": {
     "axios": "^1.13.2",
