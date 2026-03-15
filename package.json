@@ -1,6 +1,6 @@
 {
   "name": "docstron",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Node.js SDK for Docstron PDF Generation API - Complete Features",
   "main": "index.js",
    "scripts": {
